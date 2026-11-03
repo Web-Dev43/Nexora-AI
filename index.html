@@ -25,7 +25,7 @@ button{border:0;border-radius:12px;background:var(--cyan);color:#031116;font-wei
 <section class="intro"><div class="eyebrow">NEXORA SYSTEMS</div><h1>What can I help you with?</h1><p>Start a conversation with NEXORA.</p></section>
 <section class="chat" aria-label="NEXORA chat"><div class="chat-head"><span>CONVERSATION</span><span>SESSION <span id="session">CONNECTING</span></span></div><div id="messages" aria-live="polite"><div class="msg bot"><span class="sender">NEXORA</span>Hello. I'm NEXORA. What would you like to talk about?</div></div>
 <form class="composer" id="composer"><textarea id="message" maxlength="1000" rows="1" placeholder="Type a message..." aria-label="Your message" disabled></textarea><button id="send" type="submit" disabled>Send</button></form></section>
-<div class="error" id="error" role="status"></div><p class="note">Interactive demo. Messages are handled by a human operator.</p>
+<div class="error" id="error" role="status"></div>
 </main><footer>NEXORA INTELLIGENCE · DEMO</footer>
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
