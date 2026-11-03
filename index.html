@@ -7,7 +7,7 @@
 :root{color-scheme:dark;--bg:#070b10;--panel:#0d1721;--panel2:#10212c;--line:#1c3947;--cyan:#36e4f5;--muted:#8ba2af;--text:#e8f5f7}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#10313c 0,transparent 48%),var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif;display:flex;flex-direction:column}
 header{height:70px;border-bottom:1px solid #18303a;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,5vw,64px);background:#070b10dd}
-.brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:.13em}.mark{width:30px;height:30px;border:1px solid var(--cyan);border-radius:9px;display:grid;place-items:center;color:var(--cyan);box-shadow:0 0 18px #36e4f533}
+.brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:.13em}.brand-copy{display:flex;flex-direction:column;gap:1px}.tagline{font-size:10px;letter-spacing:.04em;color:var(--muted);font-weight:400}.mark{width:30px;height:30px;border:1px solid var(--cyan);border-radius:9px;display:grid;place-items:center;color:var(--cyan);box-shadow:0 0 18px #36e4f533}
 .status{color:#8fb5bd;font-size:12px;letter-spacing:.08em}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#43e7a3;margin-right:8px}
 main{width:min(850px,100%);margin:0 auto;padding:42px 18px 24px;display:flex;flex:1;flex-direction:column}.intro{text-align:center;margin:10px 0 28px}.eyebrow{color:var(--cyan);font-size:11px;letter-spacing:.24em}.intro h1{font-size:clamp(30px,6vw,48px);line-height:1.1;margin:12px 0 10px;letter-spacing:-.04em}.intro p{color:var(--muted);margin:0}
 .chat{flex:1;min-height:390px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,#0d1721f2,#0a1119f2);box-shadow:0 18px 70px #0006;display:flex;flex-direction:column;overflow:hidden}
@@ -20,7 +20,7 @@ button{border:0;border-radius:12px;background:var(--cyan);color:#031116;font-wei
 </style>
 </head>
 <body>
-<header><div class="brand"><span class="mark">N</span><span>NEXORA <span style="color:var(--cyan)">INTELLIGENCE</span></span></div><div class="status"><span class="dot"></span>SESSION READY</div></header>
+<header><div class="brand"><span class="mark">N</span><span class="brand-copy"><span>NEXORA <span style="color:var(--cyan)">INTELLIGENCE</span></span><small class="tagline">AI so natural, it's human</small></span></div><div class="status"><span class="dot"></span>SESSION READY</div></header>
 <main>
 <section class="intro"><div class="eyebrow">NEXORA SYSTEMS</div><h1>What can I help you with?</h1><p>Start a conversation with NEXORA.</p></section>
 <section class="chat" aria-label="NEXORA chat"><div class="chat-head"><span>CONVERSATION</span><span>SESSION <span id="session">CONNECTING</span></span></div><div id="messages" aria-live="polite"><div class="msg bot"><span class="sender">NEXORA</span>Hello. I'm NEXORA. What would you like to talk about?</div></div>
