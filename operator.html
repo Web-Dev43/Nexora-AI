@@ -12,7 +12,7 @@
 </main>
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-const supabase=createClient('https://ejksnhcqbflpdnoaeslw.supabase.co','sb_publishable_NPdTc8IEceJPMI0yHrsJqw_tdnSiKCj');
+const supabase=createClient('https://ejksnhcqbflpdnoaeslw.supabase.co','sb_publishable_NPdTc8IEceJPMI0yHrsJqw_tdnSiKCj',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const $=s=>document.querySelector(s);let currentId=null,channel=null,conversations=[],seen=new Set();
 function showError(s){$('#dashboardError').textContent=s||'';}
 function addMessage(m){if(seen.has(m.id))return;seen.add(m.id);const el=document.createElement('div');el.className='msg '+(m.sender==='operator'?'operator':'visitor');el.textContent=(m.sender==='operator'?'YOU: ':'VISITOR: ')+m.content;$('#messages').append(el);$('#messages').scrollTop=$('#messages').scrollHeight;}
