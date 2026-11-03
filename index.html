@@ -29,17 +29,33 @@ button{border:0;border-radius:12px;background:var(--cyan);color:#031116;font-wei
 </main><footer>NEXORA INTELLIGENCE · DEMO</footer>
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-const supabase=createClient('https://ejksnhcqbflpdnoaeslw.supabase.co','sb_publishable_NPdTc8IEceJPMI0yHrsJqw_tdnSiKCj');
+const supabase=createClient('https://ejksnhcqbflpdnoaeslw.supabase.co','sb_publishable_NPdTc8IEceJPMI0yHrsJqw_tdnSiKCj',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const $=s=>document.querySelector(s), messages=$('#messages'), input=$('#message'), send=$('#send'), error=$('#error');
 let conversationId=null, channel=null, seen=new Set();
 function bubble(text,who,id){if(id&&seen.has(id))return;if(id)seen.add(id);const el=document.createElement('div');el.className='msg '+(who==='visitor'?'user':'bot');const label=document.createElement('span');label.className='sender';label.textContent=who==='visitor'?'YOU':'NEXORA';el.append(label,document.createTextNode(text));messages.append(el);messages.scrollTop=messages.scrollHeight;}
 function fail(message){error.textContent=message;input.disabled=true;send.disabled=true;}
 async function start(){
- const {data:auth,error:authError}=await supabase.auth.signInAnonymously();
- if(authError)throw authError;
- const {data:conversation,error:conversationError}=await supabase.from('nexora_conversations').insert({visitor_id:auth.user.id}).select('id').single();
- if(conversationError)throw conversationError;
- conversationId=conversation.id;$('#session').textContent=conversationId.slice(0,6).toUpperCase();
+ // Reuse the visitor's saved anonymous auth session after refresh.
+ const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
+ if(sessionError)throw sessionError;
+ let user=sessionData.session?.user;
+ if(!user){
+  const {data:auth,error:authError}=await supabase.auth.signInAnonymously();
+  if(authError)throw authError;
+  user=auth.user;
+ }
+ if(!user)throw new Error('No visitor session is available.');
+ // Reopen this visitor's most recent conversation instead of creating a new one.
+ const {data:existing,error:lookupError}=await supabase.from('nexora_conversations').select('id').eq('visitor_id',user.id).order('created_at',{ascending:false}).limit(1).maybeSingle();
+ if(lookupError)throw lookupError;
+ if(existing){
+  conversationId=existing.id;
+ }else{
+  const {data:conversation,error:conversationError}=await supabase.from('nexora_conversations').insert({visitor_id:user.id}).select('id').single();
+  if(conversationError)throw conversationError;
+  conversationId=conversation.id;
+ }
+ conversationId=conversationId;$('#session').textContent=conversationId.slice(0,6).toUpperCase();
  const {data:oldMessages,error:readError}=await supabase.from('nexora_messages').select('id,sender,content').eq('conversation_id',conversationId).order('created_at');
  if(readError)throw readError;
  oldMessages.forEach(m=>bubble(m.content,m.sender,m.id));
