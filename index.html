@@ -52,8 +52,17 @@ async function start(){
   conversationId=existing.id;
  }else{
   const {data:conversation,error:conversationError}=await supabase.from('nexora_conversations').insert({visitor_id:user.id}).select('id').single();
-  if(conversationError)throw conversationError;
-  conversationId=conversation.id;
+  if(conversationError?.code==='23505'){
+   // Another tab may have created this visitor's conversation at the same time.
+   const {data:created,error:retryError}=await supabase.from('nexora_conversations').select('id').eq('visitor_id',user.id).maybeSingle();
+   if(retryError)throw retryError;
+   if(!created)throw conversationError;
+   conversationId=created.id;
+  }else if(conversationError){
+   throw conversationError;
+  }else{
+   conversationId=conversation.id;
+  }
  }
  conversationId=conversationId;$('#session').textContent=conversationId.slice(0,6).toUpperCase();
  const {data:oldMessages,error:readError}=await supabase.from('nexora_messages').select('id,sender,content').eq('conversation_id',conversationId).order('created_at');
