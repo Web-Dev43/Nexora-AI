@@ -1,76 +1,61 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#070b10">
-  <title>NEXORA Intelligence</title>
-  <style>
-    :root{color-scheme:dark;--bg:#070b10;--panel:#0d141d;--panel2:#101c27;--line:#1c3442;--cyan:#36e4f5;--muted:#8ba2af;--text:#e8f5f7}
-    *{box-sizing:border-box}
-    body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#10313c 0,transparent 48%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;display:flex;flex-direction:column}
-    header{height:72px;border-bottom:1px solid #18303a;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,5vw,64px);background:#070b10cc;backdrop-filter:blur(14px)}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:.13em}.mark{width:30px;height:30px;border:1px solid var(--cyan);border-radius:9px;display:grid;place-items:center;color:var(--cyan);box-shadow:0 0 18px #36e4f533;font-size:17px}
-    .status{color:#8fb5bd;font-size:12px;letter-spacing:.08em}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#43e7a3;margin-right:8px;box-shadow:0 0 10px #43e7a3}
-    main{width:min(850px,100%);margin:0 auto;padding:48px 18px 24px;display:flex;flex:1;flex-direction:column}
-    .intro{text-align:center;margin:12px 0 32px}.eyebrow{color:var(--cyan);font-size:11px;letter-spacing:.24em;text-transform:uppercase}.intro h1{font-size:clamp(30px,6vw,48px);line-height:1.1;margin:12px 0 10px;letter-spacing:-.04em}.intro p{color:var(--muted);margin:0}
-    .chat{flex:1;min-height:340px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,#0d1721f2,#0a1119f2);box-shadow:0 18px 70px #0006;display:flex;flex-direction:column;overflow:hidden}
-    .chat-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;color:#a8c2cb;font-size:12px;letter-spacing:.08em}
-    #messages{padding:22px;display:flex;flex-direction:column;gap:14px;flex:1;overflow:auto}
-    .msg{max-width:min(80%,560px);padding:12px 15px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere}.bot{align-self:flex-start;background:var(--panel2);border:1px solid #1b3542}.user{align-self:flex-end;background:#0e3a45;border:1px solid #1b7785}
-    .sender{display:block;font-size:10px;letter-spacing:.12em;color:var(--cyan);margin-bottom:4px}
-    .composer{padding:14px;border-top:1px solid var(--line);display:flex;gap:10px;background:#09111a}
-    textarea{resize:none;min-height:48px;max-height:120px;flex:1;border:1px solid #24404d;border-radius:12px;background:#0b1721;color:var(--text);font:inherit;padding:12px 14px;outline:none}
-    textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #36e4f51a}
-    button{border:0;border-radius:12px;background:var(--cyan);color:#031116;font-weight:750;padding:0 20px;cursor:pointer}
-    button:disabled{opacity:.45;cursor:not-allowed}
-    .note{text-align:center;color:#6f8995;font-size:11px;margin:13px 0 0}
-    footer{text-align:center;padding:18px;color:#536b77;font-size:11px}
-    @media(max-width:520px){main{padding-top:28px}.intro{margin-bottom:22px}.chat{min-height:55vh}.msg{max-width:90%}.composer{padding:10px}button{padding:0 15px}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#070b10">
+<title>NEXORA Intelligence</title>
+<style>
+:root{color-scheme:dark;--bg:#070b10;--panel:#0d1721;--panel2:#10212c;--line:#1c3947;--cyan:#36e4f5;--muted:#8ba2af;--text:#e8f5f7}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#10313c 0,transparent 48%),var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif;display:flex;flex-direction:column}
+header{height:70px;border-bottom:1px solid #18303a;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,5vw,64px);background:#070b10dd}
+.brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:.13em}.mark{width:30px;height:30px;border:1px solid var(--cyan);border-radius:9px;display:grid;place-items:center;color:var(--cyan);box-shadow:0 0 18px #36e4f533}
+.status{color:#8fb5bd;font-size:12px;letter-spacing:.08em}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#43e7a3;margin-right:8px}
+main{width:min(850px,100%);margin:0 auto;padding:42px 18px 24px;display:flex;flex:1;flex-direction:column}.intro{text-align:center;margin:10px 0 28px}.eyebrow{color:var(--cyan);font-size:11px;letter-spacing:.24em}.intro h1{font-size:clamp(30px,6vw,48px);line-height:1.1;margin:12px 0 10px;letter-spacing:-.04em}.intro p{color:var(--muted);margin:0}
+.chat{flex:1;min-height:390px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,#0d1721f2,#0a1119f2);box-shadow:0 18px 70px #0006;display:flex;flex-direction:column;overflow:hidden}
+.chat-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;color:#a8c2cb;font-size:12px;letter-spacing:.08em}
+#messages{padding:22px;display:flex;flex-direction:column;gap:14px;flex:1;overflow:auto}.msg{max-width:min(82%,560px);padding:12px 15px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere}.bot{align-self:flex-start;background:var(--panel2);border:1px solid #1b3542}.user{align-self:flex-end;background:#0e3a45;border:1px solid #1b7785}.sender{display:block;font-size:10px;letter-spacing:.12em;color:var(--cyan);margin-bottom:4px}
+.composer{padding:14px;border-top:1px solid var(--line);display:flex;gap:10px;background:#09111a}textarea{resize:none;min-height:48px;max-height:120px;flex:1;border:1px solid #24404d;border-radius:12px;background:#0b1721;color:var(--text);font:inherit;padding:12px 14px;outline:none}textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #36e4f51a}
+button{border:0;border-radius:12px;background:var(--cyan);color:#031116;font-weight:750;padding:0 20px;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+.note{text-align:center;color:#718995;font-size:11px;margin:13px 0 0}.error{color:#ff9b9b;text-align:center;font-size:12px;min-height:18px;margin:8px 0}footer{text-align:center;padding:18px;color:#536b77;font-size:11px}
+@media(max-width:520px){main{padding-top:26px}.intro{margin-bottom:20px}.chat{min-height:55vh}.msg{max-width:92%}.composer{padding:10px}button{padding:0 15px}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="brand"><span class="mark">N</span><span>NEXORA <span style="color:var(--cyan)">INTELLIGENCE</span></span></div>
-    <div class="status"><span class="dot"></span>INTERFACE ONLINE</div>
-  </header>
-  <main>
-    <section class="intro">
-      <div class="eyebrow">NEXORA SYSTEMS</div>
-      <h1>What can I help you with?</h1>
-      <p>Send a message to begin your session.</p>
-    </section>
-    <section class="chat" aria-label="NEXORA chat">
-      <div class="chat-head"><span>CONVERSATION</span><span>SESSION <span id="session">—</span></span></div>
-      <div id="messages" aria-live="polite">
-        <div class="msg bot"><span class="sender">NEXORA</span>Hello. I'm NEXORA. What would you like to talk about?</div>
-      </div>
-      <form class="composer" id="composer">
-        <textarea id="message" maxlength="1000" rows="1" placeholder="Type a message..." aria-label="Your message"></textarea>
-        <button id="send" type="submit">Send</button>
-      </form>
-    </section>
-    <p class="note">This is an early preview. Live operator messaging is not connected yet.</p>
-  </main>
-  <footer>NEXORA INTELLIGENCE · PREVIEW BUILD</footer>
-  <script>
-    const form=document.querySelector('#composer');
-    const input=document.querySelector('#message');
-    const messages=document.querySelector('#messages');
-    document.querySelector('#session').textContent=Math.random().toString(36).slice(2,8).toUpperCase();
-    function addMessage(text,kind){
-      const bubble=document.createElement('div');bubble.className='msg '+kind;
-      const sender=document.createElement('span');sender.className='sender';sender.textContent=kind==='user'?'YOU':'NEXORA';
-      bubble.append(sender,document.createTextNode(text));messages.append(bubble);messages.scrollTop=messages.scrollHeight;
-    }
-    form.addEventListener('submit',event=>{
-      event.preventDefault();const text=input.value.trim();if(!text)return;
-      addMessage(text,'user');input.value='';
-      addMessage('Your message is visible in this preview, but live replies are not connected yet.','bot');
-    });
-    input.addEventListener('keydown',event=>{
-      if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();form.requestSubmit();}
-    });
-  </script>
-</body>
-</html>
+<header><div class="brand"><span class="mark">N</span><span>NEXORA <span style="color:var(--cyan)">INTELLIGENCE</span></span></div><div class="status"><span class="dot"></span>SESSION READY</div></header>
+<main>
+<section class="intro"><div class="eyebrow">NEXORA SYSTEMS</div><h1>What can I help you with?</h1><p>Start a conversation with NEXORA.</p></section>
+<section class="chat" aria-label="NEXORA chat"><div class="chat-head"><span>CONVERSATION</span><span>SESSION <span id="session">CONNECTING</span></span></div><div id="messages" aria-live="polite"><div class="msg bot"><span class="sender">NEXORA</span>Hello. I'm NEXORA. What would you like to talk about?</div></div>
+<form class="composer" id="composer"><textarea id="message" maxlength="1000" rows="1" placeholder="Type a message..." aria-label="Your message" disabled></textarea><button id="send" type="submit" disabled>Send</button></form></section>
+<div class="error" id="error" role="status"></div><p class="note">Interactive demo. Messages are handled by a human operator.</p>
+</main><footer>NEXORA INTELLIGENCE · DEMO</footer>
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+const supabase=createClient('https://ejksnhcqbflpdnoaeslw.supabase.co','sb_publishable_NPdTc8IEceJPMI0yHrsJqw_tdnSiKCj');
+const $=s=>document.querySelector(s), messages=$('#messages'), input=$('#message'), send=$('#send'), error=$('#error');
+let conversationId=null, channel=null, seen=new Set();
+function bubble(text,who,id){if(id&&seen.has(id))return;if(id)seen.add(id);const el=document.createElement('div');el.className='msg '+(who==='visitor'?'user':'bot');const label=document.createElement('span');label.className='sender';label.textContent=who==='visitor'?'YOU':'NEXORA';el.append(label,document.createTextNode(text));messages.append(el);messages.scrollTop=messages.scrollHeight;}
+function fail(message){error.textContent=message;input.disabled=true;send.disabled=true;}
+async function start(){
+ const {data:auth,error:authError}=await supabase.auth.signInAnonymously();
+ if(authError)throw authError;
+ const {data:conversation,error:conversationError}=await supabase.from('nexora_conversations').insert({visitor_id:auth.user.id}).select('id').single();
+ if(conversationError)throw conversationError;
+ conversationId=conversation.id;$('#session').textContent=conversationId.slice(0,6).toUpperCase();
+ const {data:oldMessages,error:readError}=await supabase.from('nexora_messages').select('id,sender,content').eq('conversation_id',conversationId).order('created_at');
+ if(readError)throw readError;
+ oldMessages.forEach(m=>bubble(m.content,m.sender,m.id));
+ channel=supabase.channel('nexora-chat-'+conversationId).on('postgres_changes',{event:'INSERT',schema:'public',table:'nexora_messages',filter:'conversation_id=eq.'+conversationId},payload=>{const m=payload.new;bubble(m.content,m.sender,m.id);}).subscribe();
+ input.disabled=false;send.disabled=false;input.focus();
+}
+$('#composer').addEventListener('submit',async e=>{
+ e.preventDefault();const content=input.value.trim();if(!content||!conversationId)return;
+ send.disabled=true;input.disabled=true;
+ const {data,error:insertError}=await supabase.from('nexora_messages').insert({conversation_id:conversationId,sender:'visitor',content}).select('id').single();
+ if(insertError){error.textContent='Message could not be sent. Please try again.';}
+ else{bubble(content,'visitor',data.id);input.value='';error.textContent='';}
+ input.disabled=false;send.disabled=false;input.focus();
+});
+input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#composer').requestSubmit();}});
+start().catch(e=>{console.error(e);fail('Could not start a session. Please refresh and try again.');});
+window.addEventListener('beforeunload',()=>{if(channel)supabase.removeChannel(channel);});
+</script>
+</body></html>
